@@ -42,7 +42,7 @@ def acc(y_true, y_pred):
 # Load pre-trained RNN model
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model('AI_for_yf.keras', custom_objects={
+    return tf.keras.models.load_model('AI.keras', custom_objects={
     'acc': acc,
 })
 
