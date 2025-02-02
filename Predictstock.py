@@ -104,7 +104,7 @@ if st.button("Run model2"):
     else:
         st.write("# ราคาหุ้นในวันนี้มีแนวโน้มลดลง เนื่องจากผลการทำนายราคาสูงสุดมีค่าต่ำกว่าเมื่อวาน")
     
-if st.button("Run model2"):
+if st.button("Run model3"):
     st.write("### Past 10 Days' Data:")
     st.write(data)
     fig, ax = plt.subplots(figsize=(10, 5))
