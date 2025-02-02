@@ -62,8 +62,16 @@ if st.button("Run model"):
     ax.grid(True)
     st.pyplot(fig)
     predicted_price = model.predict(Xl1.values[np.newaxis])
-    st.write(f"### Predicted Next Day High Price: {np.exp(predicted_price[0][0]+np.log(df["High"].iloc[-1]))}")
+    st.write(f"### Predicted Next Day High Price: {np.exp(predicted_price[0][0]+np.log(df["High"].iloc[-1]))} or {predicted_price[0][0]}")
     if predicted_price[0][0] > 0:
         st.write("# ราคาหุ้นในวันนี้มีแนวโน้มเพิ่มขึ้น เนื่องจากผลการทำนายราคาสูงสุดมีค่าสูงกว่าเมื่อวาน")
     else:
         st.write("# ราคาหุ้นในวันนี้มีแนวโน้มลดลง เนื่องจากผลการทำนายราคาสูงสุดมีค่าต่ำกว่าเมื่อวาน")
+
+
+@st.cache_resource
+def load_model2():
+    return tf.keras.models.load_model('AI_Close(T)_Open(T-1).keras', custom_objects={
+    'acc': acc,
+})
+model2 = load_model2()
