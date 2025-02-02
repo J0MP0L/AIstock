@@ -42,29 +42,13 @@ def acc(y_true, y_pred):
 # Load pre-trained RNN model
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model('AI.keras', custom_objects={
+    return tf.keras.models.load_model('AI4.keras', custom_objects={
     'acc': acc,
 })
 
 model = load_model()
 
-@st.cache_resource
-def load_model3():
-    return tf.keras.models.load_model('AI3.keras', custom_objects={
-    'acc': acc,
-})
-
-model3 = load_model3()
-
-@st.cache_resource
-def load_model4():
-    return tf.keras.models.load_model('AI4.keras', custom_objects={
-    'acc': acc,
-})
-
-model4 = load_model4()
-
-if st.button("Run model1"):
+if st.button("Run model"):
     st.write("### Past 10 Days' Data:")
     st.write(data)
     fig, ax = plt.subplots(figsize=(10, 5))
@@ -78,46 +62,6 @@ if st.button("Run model1"):
     ax.grid(True)
     st.pyplot(fig)
     predicted_price = model.predict(Xl1.values[np.newaxis])
-    st.write(f"### Predicted Next Day High Price: {np.exp(predicted_price[0][0]+np.log(df["High"].iloc[-1]))}")
-    if predicted_price[0][0] > 0:
-        st.write("# ราคาหุ้นในวันนี้มีแนวโน้มเพิ่มขึ้น เนื่องจากผลการทำนายราคาสูงสุดมีค่าสูงกว่าเมื่อวาน")
-    else:
-        st.write("# ราคาหุ้นในวันนี้มีแนวโน้มลดลง เนื่องจากผลการทำนายราคาสูงสุดมีค่าต่ำกว่าเมื่อวาน")
-
-if st.button("Run model2"):
-    st.write("### Past 10 Days' Data:")
-    st.write(data)
-    fig, ax = plt.subplots(figsize=(10, 5))
-    for stock in ["Open", "High", "Low", "Close"]:
-        ax.plot(data.index, df[stock], label=stock)
-
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Price")
-    ax.set_title("Stock Price Comparison")
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
-    predicted_price = model3.predict(Xl1.values[np.newaxis])
-    st.write(f"### Predicted Next Day High Price: {np.exp(predicted_price[0][0]+np.log(df["High"].iloc[-1]))}")
-    if predicted_price[0][0] > 0:
-        st.write("# ราคาหุ้นในวันนี้มีแนวโน้มเพิ่มขึ้น เนื่องจากผลการทำนายราคาสูงสุดมีค่าสูงกว่าเมื่อวาน")
-    else:
-        st.write("# ราคาหุ้นในวันนี้มีแนวโน้มลดลง เนื่องจากผลการทำนายราคาสูงสุดมีค่าต่ำกว่าเมื่อวาน")
-    
-if st.button("Run model3"):
-    st.write("### Past 10 Days' Data:")
-    st.write(data)
-    fig, ax = plt.subplots(figsize=(10, 5))
-    for stock in ["Open", "High", "Low", "Close"]:
-        ax.plot(data.index, df[stock], label=stock)
-
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Price")
-    ax.set_title("Stock Price Comparison")
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
-    predicted_price = model4.predict(Xl1.values[np.newaxis])
     st.write(f"### Predicted Next Day High Price: {np.exp(predicted_price[0][0]+np.log(df["High"].iloc[-1]))}")
     if predicted_price[0][0] > 0:
         st.write("# ราคาหุ้นในวันนี้มีแนวโน้มเพิ่มขึ้น เนื่องจากผลการทำนายราคาสูงสุดมีค่าสูงกว่าเมื่อวาน")
